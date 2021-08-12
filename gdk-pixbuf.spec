@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.6
-Release  : 70
+Release  : 71
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Summary  : GObject-Introspection based documentation generator
@@ -119,23 +119,28 @@ tests components for the gdk-pixbuf package.
 %setup -q -n gdk-pixbuf-2.42.6
 cd %{_builddir}/gdk-pixbuf-2.42.6
 %patch1 -p1
+pushd ..
+cp -a gdk-pixbuf-2.42.6 buildavx512
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1618928204
+export SOURCE_DATE_EPOCH=1628782334
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false  builddir
 ninja -v -C builddir
+CFLAGS="$CFLAGS -m64 -march=skylake-avx512" CXXFLAGS="$CXXFLAGS -m64 -march=skylake-avx512 " LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512" meson --libdir=lib64/haswell/avx512_1 --prefix=/usr --buildtype=plain -Dtiff=false  builddiravx512
+ninja -v -C builddiravx512
 
 %check
 export LANG=C.UTF-8
@@ -152,6 +157,7 @@ cp %{_builddir}/gdk-pixbuf-2.42.6/subprojects/gi-docgen/LICENSES/CC-BY-SA-3.0.tx
 cp %{_builddir}/gdk-pixbuf-2.42.6/subprojects/gi-docgen/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/gdk-pixbuf/8287b608d3fa40ef401339fd907ca1260c964123
 cp %{_builddir}/gdk-pixbuf-2.42.6/subprojects/gi-docgen/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/gdk-pixbuf/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/gdk-pixbuf-2.42.6/subprojects/gi-docgen/LICENSES/OFL-1.1.txt %{buildroot}/usr/share/package-licenses/gdk-pixbuf/8b8a351a8476e37a2c4d398eb1e6c8403f487ea4
+DESTDIR=%{buildroot} ninja -C builddiravx512 install
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang gdk-pixbuf
 ## install_append content
@@ -165,6 +171,8 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 %files
 %defattr(-,root,root,-)
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders.cache
+/usr/lib64/haswell/avx512_1/girepository-1.0/GdkPixbuf-2.0.typelib
+/usr/lib64/haswell/avx512_1/girepository-1.0/GdkPixdata-2.0.typelib
 
 %files bin
 %defattr(-,root,root,-)
@@ -195,6 +203,8 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-transform.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixdata.h
+/usr/lib64/haswell/avx512_1/libgdk_pixbuf-2.0.so
+/usr/lib64/haswell/avx512_1/pkgconfig/gdk-pixbuf-2.0.pc
 /usr/lib64/libgdk_pixbuf-2.0.so
 /usr/lib64/pkgconfig/gdk-pixbuf-2.0.pc
 
@@ -210,6 +220,9 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
+/usr/lib64/haswell/avx512_1/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-bmp.so
+/usr/lib64/haswell/avx512_1/libgdk_pixbuf-2.0.so.0
+/usr/lib64/haswell/avx512_1/libgdk_pixbuf-2.0.so.0.4200.6
 /usr/lib64/libgdk_pixbuf-2.0.so.0
 /usr/lib64/libgdk_pixbuf-2.0.so.0.4200.6
 
