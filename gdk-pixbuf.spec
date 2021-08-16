@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.6
-Release  : 71
+Release  : 72
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Summary  : GObject-Introspection based documentation generator
@@ -36,6 +36,7 @@ BuildRequires : qemu
 BuildRequires : shared-mime-info
 BuildRequires : zlib-dev
 Patch1: mime-fallback.patch
+Patch2: 0001-Work-around-inability-to-load-optimized-modules.patch
 
 %description
 The code in this directory implements optimized, filtered scaling
@@ -119,6 +120,7 @@ tests components for the gdk-pixbuf package.
 %setup -q -n gdk-pixbuf-2.42.6
 cd %{_builddir}/gdk-pixbuf-2.42.6
 %patch1 -p1
+%patch2 -p1
 pushd ..
 cp -a gdk-pixbuf-2.42.6 buildavx512
 popd
@@ -128,7 +130,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1628782334
+export SOURCE_DATE_EPOCH=1629073502
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -137,9 +139,11 @@ export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=a
 export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false  builddir
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false \
+-Drelocatable=false  builddir
 ninja -v -C builddir
-CFLAGS="$CFLAGS -m64 -march=skylake-avx512" CXXFLAGS="$CXXFLAGS -m64 -march=skylake-avx512 " LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512" meson --libdir=lib64/haswell/avx512_1 --prefix=/usr --buildtype=plain -Dtiff=false  builddiravx512
+CFLAGS="$CFLAGS -m64 -march=skylake-avx512" CXXFLAGS="$CXXFLAGS -m64 -march=skylake-avx512 " LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512" meson --libdir=lib64/haswell/avx512_1 --prefix=/usr --buildtype=plain -Dtiff=false \
+-Drelocatable=false  builddiravx512
 ninja -v -C builddiravx512
 
 %check
@@ -220,7 +224,6 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
-/usr/lib64/haswell/avx512_1/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-bmp.so
 /usr/lib64/haswell/avx512_1/libgdk_pixbuf-2.0.so.0
 /usr/lib64/haswell/avx512_1/libgdk_pixbuf-2.0.so.0.4200.6
 /usr/lib64/libgdk_pixbuf-2.0.so.0

@@ -1,0 +1,80 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Patrick McCarty <patrick.mccarty@intel.com>
+Date: Sun, 15 Aug 2021 17:21:05 -0700
+Subject: [PATCH] Work around inability to load optimized modules
+
+The gdk-pixbuf loader module installation paths are dependent on the
+libdir paths, but we have to avoid installing optimized modules to those
+locations for two reasons: (a) clr-avx-tools may choose to omit any/all
+of the optimized modules from the install, and (b) there is no fallback
+lookup path in gdk-pixbuf in case optimized modules do not exist.
+
+So, as a workaround, make the module loader path *fixed*, avoiding the
+optimized module lookup paths. Any optimized modules that may be
+installed will be overwritten later by the base modules.
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ gdk-pixbuf/gdk-pixbuf-io.c | 2 +-
+ gdk-pixbuf/meson.build     | 2 +-
+ gdk-pixbuf/queryloaders.c  | 2 +-
+ meson.build                | 3 ++-
+ 4 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/gdk-pixbuf/gdk-pixbuf-io.c b/gdk-pixbuf/gdk-pixbuf-io.c
+index eb442e3..4c7755b 100644
+--- a/gdk-pixbuf/gdk-pixbuf-io.c
++++ b/gdk-pixbuf/gdk-pixbuf-io.c
+@@ -362,7 +362,7 @@ gdk_pixbuf_get_module_file (void)
+   gchar *result = g_strdup (g_getenv ("GDK_PIXBUF_MODULE_FILE"));
+ 
+   if (!result)
+-          result = g_build_filename (GDK_PIXBUF_LIBDIR, "gdk-pixbuf-2.0", GDK_PIXBUF_BINARY_VERSION, "loaders.cache", NULL);
++          result = g_build_filename ("/usr/lib64", "gdk-pixbuf-2.0", GDK_PIXBUF_BINARY_VERSION, "loaders.cache", NULL);
+ 
+   return result;
+ }
+diff --git a/gdk-pixbuf/meson.build b/gdk-pixbuf/meson.build
+index 8b0590b..609152e 100644
+--- a/gdk-pixbuf/meson.build
++++ b/gdk-pixbuf/meson.build
+@@ -374,7 +374,7 @@ pkgconfig.generate(
+   variables: [
+     'bindir=${prefix}/@0@'.format(get_option('bindir')),
+     'gdk_pixbuf_binary_version=@0@'.format(gdk_pixbuf_binary_version),
+-    'gdk_pixbuf_binarydir=${libdir}/@0@/@1@'.format(gdk_pixbuf_api_name, gdk_pixbuf_binary_version),
++    'gdk_pixbuf_binarydir=/usr/lib64/@0@/@1@'.format(gdk_pixbuf_api_name, gdk_pixbuf_binary_version),
+     'gdk_pixbuf_moduledir=${gdk_pixbuf_binarydir}/loaders',
+     'gdk_pixbuf_cache_file=${gdk_pixbuf_binarydir}/loaders.cache',
+     'gdk_pixbuf_csource=${bindir}/gdk-pixbuf-csource',
+diff --git a/gdk-pixbuf/queryloaders.c b/gdk-pixbuf/queryloaders.c
+index ddcae7b..b9ec94a 100644
+--- a/gdk-pixbuf/queryloaders.c
++++ b/gdk-pixbuf/queryloaders.c
+@@ -304,7 +304,7 @@ gdk_pixbuf_get_module_file (void)
+         gchar *result = g_strdup (g_getenv ("GDK_PIXBUF_MODULE_FILE"));
+ 
+         if (!result)
+-                result = g_build_filename (GDK_PIXBUF_LIBDIR, "gdk-pixbuf-2.0", GDK_PIXBUF_BINARY_VERSION, "loaders.cache", NULL);
++                result = g_build_filename ("/usr/lib64", "gdk-pixbuf-2.0", GDK_PIXBUF_BINARY_VERSION, "loaders.cache", NULL);
+ 
+         return result;
+ }
+diff --git a/meson.build b/meson.build
+index 7a1409b..e24ed8e 100644
+--- a/meson.build
++++ b/meson.build
+@@ -54,7 +54,7 @@ gdk_pixbuf_datadir = join_paths(gdk_pixbuf_prefix, get_option('datadir'))
+ gdk_pixbuf_mandir = join_paths(gdk_pixbuf_prefix, get_option('mandir'))
+ gdk_pixbuf_localedir = join_paths(gdk_pixbuf_prefix, get_option('localedir'))
+ gdk_pixbuf_libexecdir = join_paths(gdk_pixbuf_prefix, get_option('libexecdir'))
+-gdk_pixbuf_loaderdir = join_paths(gdk_pixbuf_libdir, 'gdk-pixbuf-@0@/@1@/loaders'.format(gdk_pixbuf_api_version, gdk_pixbuf_binary_version))
++gdk_pixbuf_loaderdir = join_paths('/usr/lib64', 'gdk-pixbuf-@0@/@1@/loaders'.format(gdk_pixbuf_api_version, gdk_pixbuf_binary_version))
+ 
+ # Dependencies
+ glib_req_version = '>= 2.56.0'
+@@ -442,3 +442,4 @@ summary('prefix', gdk_pixbuf_prefix, section: 'Directories')
+ summary('libdir', gdk_pixbuf_libdir, section: 'Directories')
+ summary('datadir', gdk_pixbuf_datadir, section: 'Directories')
+ summary('libexecdir', gdk_pixbuf_libdir, section: 'Directories')
++summary('loaderdir', gdk_pixbuf_loaderdir, section: 'Directories')
