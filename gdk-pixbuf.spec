@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.6
-Release  : 73
+Release  : 74
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Summary  : GObject-Introspection based documentation generator
@@ -157,7 +157,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1634051164
+export SOURCE_DATE_EPOCH=1634051938
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -264,7 +264,6 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 
 %files libexec
 %defattr(-,root,root,-)
-/usr/share/clear/optimized-elf/exec*
 
 %files license
 %defattr(0644,root,root,0755)
@@ -729,6 +728,7 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/reftests/tga/gtk-logo-rle-32bpp-top-right.tga
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/reftests/tga/gtk-logo-rle-32bpp-top-right.tga.ref.png
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/reftests/tga/gtk-logo.ref.png
+/usr/share/clear/optimized-elf/test*
 /usr/share/installed-tests/gdk-pixbuf/animation.test
 /usr/share/installed-tests/gdk-pixbuf/cve-2015-4491.test
 /usr/share/installed-tests/gdk-pixbuf/pixbuf-area-updated.test
