@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.6
-Release  : 74
+Release  : 75
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.6.tar.xz
 Summary  : GObject-Introspection based documentation generator
@@ -14,7 +14,6 @@ Requires: gdk-pixbuf-bin = %{version}-%{release}
 Requires: gdk-pixbuf-data = %{version}-%{release}
 Requires: gdk-pixbuf-filemap = %{version}-%{release}
 Requires: gdk-pixbuf-lib = %{version}-%{release}
-Requires: gdk-pixbuf-libexec = %{version}-%{release}
 Requires: gdk-pixbuf-license = %{version}-%{release}
 Requires: gdk-pixbuf-locales = %{version}-%{release}
 Requires: gdk-pixbuf-man = %{version}-%{release}
@@ -48,7 +47,6 @@ for pixmap data.
 Summary: bin components for the gdk-pixbuf package.
 Group: Binaries
 Requires: gdk-pixbuf-data = %{version}-%{release}
-Requires: gdk-pixbuf-libexec = %{version}-%{release}
 Requires: gdk-pixbuf-license = %{version}-%{release}
 Requires: gdk-pixbuf-filemap = %{version}-%{release}
 
@@ -89,22 +87,11 @@ filemap components for the gdk-pixbuf package.
 Summary: lib components for the gdk-pixbuf package.
 Group: Libraries
 Requires: gdk-pixbuf-data = %{version}-%{release}
-Requires: gdk-pixbuf-libexec = %{version}-%{release}
 Requires: gdk-pixbuf-license = %{version}-%{release}
 Requires: gdk-pixbuf-filemap = %{version}-%{release}
 
 %description lib
 lib components for the gdk-pixbuf package.
-
-
-%package libexec
-Summary: libexec components for the gdk-pixbuf package.
-Group: Default
-Requires: gdk-pixbuf-license = %{version}-%{release}
-Requires: gdk-pixbuf-filemap = %{version}-%{release}
-
-%description libexec
-libexec components for the gdk-pixbuf package.
 
 
 %package license
@@ -157,7 +144,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1634051938
+export SOURCE_DATE_EPOCH=1634688947
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -169,10 +156,10 @@ export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -fl
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false \
 -Drelocatable=false  builddir
 ninja -v -C builddir
-CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false \
+CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false \
 -Drelocatable=false  builddiravx2
 ninja -v -C builddiravx2
-CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false \
+CFLAGS="$CFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v4 -Wl,-z,x86-64-v4 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v4" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=false \
 -Drelocatable=false  builddiravx512
 ninja -v -C builddiravx512
 
@@ -192,9 +179,7 @@ cp %{_builddir}/gdk-pixbuf-2.42.6/subprojects/gi-docgen/LICENSES/CC0-1.0.txt %{b
 cp %{_builddir}/gdk-pixbuf-2.42.6/subprojects/gi-docgen/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/gdk-pixbuf/31a3d460bb3c7d98845187c716a30db81c44b615
 cp %{_builddir}/gdk-pixbuf-2.42.6/subprojects/gi-docgen/LICENSES/OFL-1.1.txt %{buildroot}/usr/share/package-licenses/gdk-pixbuf/8b8a351a8476e37a2c4d398eb1e6c8403f487ea4
 DESTDIR=%{buildroot}-v3 ninja -C builddiravx2 install
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 DESTDIR=%{buildroot}-v4 ninja -C builddiravx512 install
-/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang gdk-pixbuf
 ## install_append content
@@ -204,6 +189,8 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 #sed -e 's/lib64/lib32/g' %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders.cache > %{buildroot}/usr/lib32/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -261,9 +248,6 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/lib64/libgdk_pixbuf-2.0.so.0
 /usr/lib64/libgdk_pixbuf-2.0.so.0.4200.6
 /usr/share/clear/optimized-elf/lib*
-
-%files libexec
-%defattr(-,root,root,-)
 
 %files license
 %defattr(0644,root,root,0755)
