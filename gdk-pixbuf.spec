@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.8
-Release  : 79
+Release  : 80
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.8.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.8.tar.xz
 Summary  : GObject-Introspection based documentation generator
@@ -152,7 +152,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656029804
+export SOURCE_DATE_EPOCH=1656111961
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -260,29 +260,9 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0.4200.8
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-ani.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-bmp.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-gif.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-icns.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-ico.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-pnm.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-qtif.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-tga.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-xbm.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-xpm.so
 /usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so
 /usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0.4200.8
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-ani.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-bmp.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-gif.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-icns.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-ico.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-pnm.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-qtif.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-tga.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-xbm.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-xpm.so
 /usr/lib64/libgdk_pixbuf-2.0.so.0
 /usr/lib64/libgdk_pixbuf-2.0.so.0.4200.8
 
