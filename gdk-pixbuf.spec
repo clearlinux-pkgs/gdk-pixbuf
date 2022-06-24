@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.8
-Release  : 78
+Release  : 79
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.8.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.8.tar.xz
 Summary  : GObject-Introspection based documentation generator
@@ -152,15 +152,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1647875035
+export SOURCE_DATE_EPOCH=1656029804
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mprefer-vector-width=256 "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=disabled \
 -Drelocatable=false  builddir
 ninja -v -C builddir
@@ -201,8 +201,8 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 #sed -e 's/lib64/lib32/g' %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders.cache > %{buildroot}/usr/lib32/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
 ## install_append end
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
-/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -257,9 +257,34 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0.4200.8
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-ani.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-bmp.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-gif.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-icns.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-ico.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-pnm.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-qtif.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-tga.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-xbm.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libpixbufloader-xpm.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0
+/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0.4200.8
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-ani.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-bmp.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-gif.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-icns.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-ico.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-pnm.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-qtif.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-tga.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-xbm.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libpixbufloader-xpm.so
 /usr/lib64/libgdk_pixbuf-2.0.so.0
 /usr/lib64/libgdk_pixbuf-2.0.so.0.4200.8
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
