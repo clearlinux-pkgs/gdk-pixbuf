@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.8
-Release  : 80
+Release  : 81
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.8.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.8.tar.xz
 Summary  : GObject-Introspection based documentation generator
@@ -238,6 +238,8 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-transform.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixdata.h
+/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so
+/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so
 /usr/lib64/libgdk_pixbuf-2.0.so
 /usr/lib64/pkgconfig/gdk-pixbuf-2.0.pc
 
@@ -257,14 +259,13 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0.4200.8
-/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so
 /usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0
 /usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0.4200.8
 /usr/lib64/libgdk_pixbuf-2.0.so.0
 /usr/lib64/libgdk_pixbuf-2.0.so.0.4200.8
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
