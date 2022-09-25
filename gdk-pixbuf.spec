@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.9
-Release  : 87
+Release  : 88
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.9.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.9.tar.xz
 Summary  : No detailed summary available
@@ -143,7 +143,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1660070481
+export SOURCE_DATE_EPOCH=1664144362
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -171,7 +171,7 @@ meson test -C builddir --print-errorlogs || :
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/gdk-pixbuf
-cp %{_builddir}/gdk-pixbuf-%{version}/COPYING %{buildroot}/usr/share/package-licenses/gdk-pixbuf/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/gdk-pixbuf-%{version}/COPYING %{buildroot}/usr/share/package-licenses/gdk-pixbuf/01a6b4bf79aca9b556822601186afab86e8c4fbf || :
 DESTDIR=%{buildroot}-v3 ninja -C builddiravx2 install
 DESTDIR=%{buildroot}-v4 ninja -C builddiravx512 install
 DESTDIR=%{buildroot} ninja -C builddir install
