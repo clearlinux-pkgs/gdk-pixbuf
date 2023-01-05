@@ -4,7 +4,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.10
-Release  : 91
+Release  : 92
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz
 Summary  : No detailed summary available
