@@ -5,7 +5,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.10
-Release  : 93
+Release  : 94
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz
 Summary  : No detailed summary available
@@ -13,7 +13,6 @@ Group    : Development/Tools
 License  : LGPL-2.1
 Requires: gdk-pixbuf-bin = %{version}-%{release}
 Requires: gdk-pixbuf-data = %{version}-%{release}
-Requires: gdk-pixbuf-filemap = %{version}-%{release}
 Requires: gdk-pixbuf-lib = %{version}-%{release}
 Requires: gdk-pixbuf-license = %{version}-%{release}
 Requires: gdk-pixbuf-locales = %{version}-%{release}
@@ -51,7 +50,6 @@ Summary: bin components for the gdk-pixbuf package.
 Group: Binaries
 Requires: gdk-pixbuf-data = %{version}-%{release}
 Requires: gdk-pixbuf-license = %{version}-%{release}
-Requires: gdk-pixbuf-filemap = %{version}-%{release}
 
 %description bin
 bin components for the gdk-pixbuf package.
@@ -78,20 +76,11 @@ Requires: gdk-pixbuf = %{version}-%{release}
 dev components for the gdk-pixbuf package.
 
 
-%package filemap
-Summary: filemap components for the gdk-pixbuf package.
-Group: Default
-
-%description filemap
-filemap components for the gdk-pixbuf package.
-
-
 %package lib
 Summary: lib components for the gdk-pixbuf package.
 Group: Libraries
 Requires: gdk-pixbuf-data = %{version}-%{release}
 Requires: gdk-pixbuf-license = %{version}-%{release}
-Requires: gdk-pixbuf-filemap = %{version}-%{release}
 
 %description lib
 lib components for the gdk-pixbuf package.
@@ -147,15 +136,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680023421
+export SOURCE_DATE_EPOCH=1683128462
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=disabled \
 -Drelocatable=false  builddir
 ninja -v -C builddir
@@ -196,11 +185,18 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/gdk-pixbuf-csource
+/V3/usr/bin/gdk-pixbuf-pixdata
+/V3/usr/bin/gdk-pixbuf-query-loaders
+/V3/usr/bin/gdk-pixbuf-thumbnailer
+/V4/usr/bin/gdk-pixbuf-csource
+/V4/usr/bin/gdk-pixbuf-pixdata
+/V4/usr/bin/gdk-pixbuf-query-loaders
+/V4/usr/bin/gdk-pixbuf-thumbnailer
 /usr/bin/gdk-pixbuf-csource
 /usr/bin/gdk-pixbuf-pixdata
 /usr/bin/gdk-pixbuf-query-loaders
 /usr/bin/gdk-pixbuf-thumbnailer
-/usr/share/clear/optimized-elf/bin*
 
 %files data
 %defattr(-,root,root,-)
@@ -211,6 +207,8 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libgdk_pixbuf-2.0.so
+/V4/usr/lib64/libgdk_pixbuf-2.0.so
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-animation.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-autocleanups.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-core.h
@@ -224,17 +222,35 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-transform.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixdata.h
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so
-/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so
 /usr/lib64/libgdk_pixbuf-2.0.so
 /usr/lib64/pkgconfig/gdk-pixbuf-2.0.pc
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-gdk-pixbuf
-
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-ani.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-bmp.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-icns.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-ico.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-pnm.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-qtif.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
+/V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
+/V3/usr/lib64/libgdk_pixbuf-2.0.so.0
+/V3/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.10
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-ani.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-bmp.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-icns.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-ico.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-pnm.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-qtif.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
+/V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
+/V4/usr/lib64/libgdk_pixbuf-2.0.so.0
+/V4/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.10
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-ani.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-bmp.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
@@ -245,13 +261,8 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgdk_pixbuf-2.0.so.0.4200.10
-/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v4/libgdk_pixbuf-2.0.so.0.4200.10
 /usr/lib64/libgdk_pixbuf-2.0.so.0
 /usr/lib64/libgdk_pixbuf-2.0.so.0.4200.10
-/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
@@ -264,6 +275,52 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 
 %files tests
 %defattr(-,root,root,-)
+/V3/usr/libexec/installed-tests/gdk-pixbuf/animation
+/V3/usr/libexec/installed-tests/gdk-pixbuf/cve-2015-4491
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-area-updated
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-composite
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-construction
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-dpi
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-fail
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-gif
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-gif-circular-table
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-icc
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-icon-serialize
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-jpeg
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-pixdata
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-randomly-modified
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-readonly-to-mutable
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-reftest
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-resource
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-save
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-scale
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-scale-two-step
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-short-gif-write
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-stream
+/V3/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-threads
+/V4/usr/libexec/installed-tests/gdk-pixbuf/animation
+/V4/usr/libexec/installed-tests/gdk-pixbuf/cve-2015-4491
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-area-updated
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-composite
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-construction
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-dpi
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-fail
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-gif
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-gif-circular-table
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-icc
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-icon-serialize
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-jpeg
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-pixdata
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-randomly-modified
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-readonly-to-mutable
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-reftest
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-resource
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-save
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-scale
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-scale-two-step
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-short-gif-write
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-stream
+/V4/usr/libexec/installed-tests/gdk-pixbuf/pixbuf-threads
 /usr/libexec/installed-tests/gdk-pixbuf/1_partyanimsm2.gif
 /usr/libexec/installed-tests/gdk-pixbuf/aero.gif
 /usr/libexec/installed-tests/gdk-pixbuf/animation
@@ -720,7 +777,6 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/reftests/tga/gtk-logo-rle-32bpp-top-right.tga
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/reftests/tga/gtk-logo-rle-32bpp-top-right.tga.ref.png
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/reftests/tga/gtk-logo.ref.png
-/usr/share/clear/optimized-elf/test*
 /usr/share/installed-tests/gdk-pixbuf/animation.test
 /usr/share/installed-tests/gdk-pixbuf/cve-2015-4491.test
 /usr/share/installed-tests/gdk-pixbuf/pixbuf-area-updated.test
