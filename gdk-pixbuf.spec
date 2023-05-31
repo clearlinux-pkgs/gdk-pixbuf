@@ -5,7 +5,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.10
-Release  : 94
+Release  : 95
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz
 Summary  : No detailed summary available
@@ -136,7 +136,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683128462
+export SOURCE_DATE_EPOCH=1685507183
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -207,8 +207,6 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgdk_pixbuf-2.0.so
-/V4/usr/lib64/libgdk_pixbuf-2.0.so
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-animation.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-autocleanups.h
 /usr/include/gdk-pixbuf-2.0/gdk-pixbuf/gdk-pixbuf-core.h
@@ -237,7 +235,6 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
 /V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
 /V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
-/V3/usr/lib64/libgdk_pixbuf-2.0.so.0
 /V3/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.10
 /V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-ani.so
 /V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-bmp.so
@@ -249,7 +246,6 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tga.so
 /V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xbm.so
 /V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-xpm.so
-/V4/usr/lib64/libgdk_pixbuf-2.0.so.0
 /V4/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.10
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-ani.so
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-bmp.so
