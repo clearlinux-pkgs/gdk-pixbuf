@@ -7,7 +7,7 @@
 #
 Name     : gdk-pixbuf
 Version  : 2.42.11
-Release  : 98
+Release  : 99
 URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.11.tar.xz
 Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.11.tar.xz
 Summary  : No detailed summary available
@@ -138,7 +138,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1713662956
+export SOURCE_DATE_EPOCH=1714432031
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -155,15 +155,18 @@ ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 export GOAMD64=v2
 meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=disabled \
--Drelocatable=false  builddir
+-Drelocatable=false \
+-Dbuiltin_loaders=png,jpeg,xpm,bmp,ico,pnm,xbm  builddir
 ninja -v -C builddir
 GOAMD64=v3
 CFLAGS="$CFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 " CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -Wl,-z,x86-64-v3 " LDFLAGS="$LDFLAGS -march=x86-64-v3 " meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=disabled \
--Drelocatable=false  builddiravx2
+-Drelocatable=false \
+-Dbuiltin_loaders=png,jpeg,xpm,bmp,ico,pnm,xbm  builddiravx2
 ninja -v -C builddiravx2
 GOAMD64=v4
 CFLAGS="$CFLAGS -march=x86-64-v4 -mprefer-vector-width=512 -Wl,-z,x86-64-v4 " CXXFLAGS="$CXXFLAGS -march=x86-64-v4 -mprefer-vector-width=512 -Wl,-z,x86-64-v4 " LDFLAGS="$LDFLAGS -march=x86-64-v4 " meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dtiff=disabled \
--Drelocatable=false  builddiravx512
+-Drelocatable=false \
+-Dbuiltin_loaders=png,jpeg,xpm,bmp,ico,pnm,xbm  builddiravx512
 ninja -v -C builddiravx512
 
 %check
