@@ -6,10 +6,10 @@
 # autospec commit: 5905be9
 #
 Name     : gdk-pixbuf
-Version  : 2.42.11
-Release  : 99
-URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.11.tar.xz
-Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.11.tar.xz
+Version  : 2.42.12
+Release  : 100
+URL      : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz
+Source0  : https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -122,15 +122,15 @@ tests components for the gdk-pixbuf package.
 
 
 %prep
-%setup -q -n gdk-pixbuf-2.42.11
-cd %{_builddir}/gdk-pixbuf-2.42.11
+%setup -q -n gdk-pixbuf-2.42.12
+cd %{_builddir}/gdk-pixbuf-2.42.12
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a gdk-pixbuf-2.42.11 buildavx2
+cp -a gdk-pixbuf-2.42.12 buildavx2
 popd
 pushd ..
-cp -a gdk-pixbuf-2.42.11 buildavx512
+cp -a gdk-pixbuf-2.42.12 buildavx512
 popd
 
 %build
@@ -138,7 +138,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1714432031
+export SOURCE_DATE_EPOCH=1715781139
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -258,12 +258,12 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 %files lib
 %defattr(-,root,root,-)
 /V3/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
-/V3/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.11
+/V3/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.12
 /V4/usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
-/V4/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.11
+/V4/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.12
 /usr/lib64/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
 /usr/lib64/libgdk_pixbuf-2.0.so.0
-/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.11
+/usr/lib64/libgdk_pixbuf-2.0.so.0.4200.12
 
 %files license
 %defattr(0644,root,root,0755)
@@ -364,6 +364,7 @@ rm %{buildroot}%{_libdir}/gdk-pixbuf-2.0/2.10.0/loaders/lib*svg*.so
 /usr/libexec/installed-tests/gdk-pixbuf/test-image.pixdata
 /usr/libexec/installed-tests/gdk-pixbuf/test-image.png
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/fail/CVE-2017-2862.jpg
+/usr/libexec/installed-tests/gdk-pixbuf/test-images/fail/CVE-2022-48622.ani
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/fail/DoS.tga
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/fail/androstanRezeptor.tga
 /usr/libexec/installed-tests/gdk-pixbuf/test-images/fail/bug776694.bmp
