@@ -1,3 +1,4 @@
 -Dtiff=disabled
 -Drelocatable=false
 -Dbuiltin_loaders=png,jpeg,xpm,bmp,ico,pnm,xbm
+-Dothers=enabled

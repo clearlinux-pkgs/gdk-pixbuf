@@ -1,7 +1,6 @@
 # This file contains recursive sources that require this package
 adwaita-icon-theme
 cheese
-gedit
 gimp
 gnome-photos
 gst-plugins-good
